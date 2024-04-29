@@ -130,7 +130,7 @@ ret
 endp printrighthandproc
 
 
-
+;end move right hand
 
 
 proc printlefthandproc
@@ -236,9 +236,218 @@ ret
 endp printlefthandpro
 
  
+;end move left hand
+
+
+
+proc printrightlegproc
+
+cmp stateRightleg,1
+
+je printrightlegprocstate1
 
  
 
+cmp stateRightleg,2
+
+je printrightlegprocstate2
+
+ 
+
+cmp stateRightleg,3
+
+je printrightlegprocstate3
+
+ret
+
+printrightlegprocstate1: 
+
+mov bx, 32
+
+mov cx, 163
+
+mov dx, 132
+
+printrightlegprocstate1Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+Inc dx
+
+dec cx
+
+dec bx
+
+cmp bx,0
+
+jne printrightlegprocstate1Loop  
+
+ret
+
+ 
+
+printrightlegprocstate2:
+
+mov bx, 32
+
+mov cx, 163
+
+mov dx, 132
+
+printrightlegprocstate2Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+inc dx
+
+dec bx
+
+cmp bx,0
+
+jne printrightlegprocstate2Loop  
+
+ 
+
+ret
+
+printrightlegprocstate3:
+
+mov bx, 32
+
+mov cx, 163
+
+mov dx, 132
+
+printrightlegprocstate3Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+inc dx
+
+inc cx
+
+dec bx
+
+cmp bx,0
+
+jne printrightlegprocstate3Loop  
+
+ret
+
+endp printrightlegproc
+
+;end move right leg
+
+
+proc printleftlegproc
+
+cmp stateleftleg,1
+
+je printleftlegprocstate1
+
+ 
+
+cmp stateleftleg,2
+
+je printleftlegprocstate2
+
+ 
+
+cmp stateleftleg,3
+
+je printleftlegprocstate3
+
+ret
+
+printleftlegprocstate1: 
+
+mov bx, 32
+
+mov cx, 156
+
+mov dx, 132
+
+printleftlegprocstate1Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+Inc dx
+
+dec cx
+
+dec bx
+
+cmp bx,0
+
+jne printleftlegprocstate1Loop  
+
+ret
+
+ 
+
+printleftlegprocstate2:
+
+mov bx, 32
+
+mov cx, 156
+
+mov dx, 132
+
+printleftlegprocstate2Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+inc dx
+
+dec bx
+
+cmp bx,0
+
+jne printleftlegprocstate2Loop  
+
+ 
+
+ret
+
+printleftlegprocstate3:
+
+mov bx, 32
+
+mov cx, 156
+
+mov dx, 132
+
+printleftlegprocstate3Loop:
+
+Mov ah,0ch
+
+Int 10h
+
+inc dx
+
+inc cx
+
+dec bx
+
+cmp bx,0
+
+jne printleftlegprocstate3Loop  
+
+ret
+
+endp printleftlegproc
+
+;end move left leg
 Proc body
 
 Bodyloop:
@@ -578,7 +787,7 @@ pop bx
 
 Mov cx,156
 
-Mov bx,2
+Mov bx,1
 
  
 
@@ -628,7 +837,7 @@ pop bx
 
 Mov cx,163
 
-Mov bx,2
+Mov bx,1
 
  
 
@@ -985,13 +1194,13 @@ je printlefthand
 
 cmp type,3
 
-;je printrightleg
+je printrightleg
 
  
 
 cmp type,4
 
-;je printlefthand
+je printleftleg
 
 mov type,1
 
@@ -1047,8 +1256,64 @@ mov stateleftHand,1
 mov al,0fh
 call printlefthandproc
 jmp Onclick
-;end left hand      
+;end left hand
+
+
+printrightleg:
+
+cmp stateRightleg,3
+je setstaterightleg1
+
+mov al,0
+
+call printrightlegproc
+
+inc stateRightleg
+
+mov al,0fh
+
+call printrightlegproc
+
+jmp Onclick
+   
+   
+setstaterightleg1:
+mov al,0
+call printrightlegproc
+mov stateRightleg,1
+mov al,0fh
+call printrightlegproc
+jmp Onclick
+
+;end right leg     
       
+
+printleftleg:
+cmp stateleftleg,3
+je setstateleftleg1
+
+mov al,0
+
+call printleftlegproc
+
+inc stateleftleg
+
+mov al,0fh
+
+call printleftlegproc
+
+jmp Onclick
+   
+   
+setstateleftleg1:
+mov al,0
+call printleftlegproc
+mov stateleftleg,1
+mov al,0fh
+call printleftlegproc
+jmp Onclick
+
+
 
 backstate:
 
@@ -1066,13 +1331,13 @@ je printlefthandb
 
 cmp type,3
 
-;je printrightleg
+je printrightlegb
 
  
 
 cmp type,4
 
-;je printlefthand      
+je printleftlegb      
 
 
 
@@ -1137,10 +1402,63 @@ mov stateleftHand,3
 mov al,0fh
 call printlefthandproc
 jmp Onclick
+;end left hand
 
 
+printrightlegB:
+
+cmp stateRightleg,1
+je setstaterightleg1B
+
+mov al,0
+
+call printrightlegproc
+
+dec stateRightleg
+
+mov al,0fh
+
+call printrightlegproc
+
+jmp Onclick
+   
+   
+setstaterightleg1B:
+mov al,0
+call printrightlegproc
+mov stateRightleg,3
+mov al,0fh
+call printrightlegproc
+jmp Onclick
+;end right leg
 
 
+printleftlegB:
+
+cmp stateleftleg,1
+je setstateleftleg1B
+
+mov al,0
+
+call printleftlegproc
+
+dec stateleftleg
+
+mov al,0fh
+
+call printleftlegproc
+
+jmp Onclick
+   
+   
+setstateleftleg1B:
+mov al,0
+call printleftlegproc
+mov stateleftleg,3
+mov al,0fh
+call printleftlegproc
+jmp Onclick
+;end left leg
 
 
 
