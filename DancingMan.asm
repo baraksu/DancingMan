@@ -11,17 +11,16 @@ stateLeftHand db 2
 stateRightLeg db 2
 stateLeftLeg db 2
 
-Msg1 db 13,10,"what body part do you want to choose ",13,10,"$"
-
-Msg2 db 13,10," Right hand 1",13,10,"$"
-
-Msg3 db 13,10," left hand 1",13,10,"$"
-
-Msg4 db 13,10," Right leg 3 1",13,10,"$"
-
-Msg5 db 13,10,"left leg 4",13,10,"$"
 
 color dw 0fh
+
+
+logo db "          _                  _                                     ", 13,10,        "         | |                (_)                                    ", 13,10,        "       __| | __ _ _ __   ___ _ _ __   __ _   _ __ ___   __ _ _ __  ", 13,10,        "      / _` |/ _` | '_ \ / __| | '_ \ / _` | | '_ ` _ \ / _` | '_ \ ", 13,10,        "     | (_| | (_| | | | | (__| | | | | (_| | | | | | | | (_| | | | |", 13,10,        "      \__,_|\__,_|_| |_|\___|_|_| |_|\__, | |_| |_| |_|\__,_|_| |_|", 13,10,        "                                      __/ |                        ", 13,10,        "                                     |___/                         ",13,10,13,10,"Created by Omer Zelcer $"
+
+
+
+
+
 
 .CODE
 
@@ -723,7 +722,19 @@ START:
 
 Mov ax,@data
 
-Mov ds,ax
+Mov ds,ax 
+
+
+
+lea dx, logo
+mov ah,09h
+int 21h
+
+mov ah,001h
+int 21h
+
+
+
 
 Mov ax,0013h
 
