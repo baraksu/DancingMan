@@ -19,15 +19,13 @@ logo db "          _                  _                                     ", 1
 
 
 
-
-
-
 .CODE
 
 jmp start
 
 proc printrighthandproc
-
+mov bp,sp
+mov ax,[bp+2]
 cmp stateRightHand,1
 
 je printrighthandprocstate1
@@ -133,6 +131,8 @@ endp printrighthandproc
 
 
 proc printlefthandproc
+mov bp,sp
+mov ax,[bp+2]
 
 cmp stateleftHand,1
 
@@ -240,6 +240,8 @@ endp printlefthandpro
 
 
 proc printrightlegproc
+mov bp,sp
+mov ax,[bp+2]
 
 cmp stateRightleg,1
 
@@ -345,6 +347,8 @@ endp printrightlegproc
 
 
 proc printleftlegproc
+mov bp,sp
+mov ax,[bp+2]
 
 cmp stateleftleg,1
 
@@ -732,8 +736,6 @@ int 21h
 
 mov ah,001h
 int 21h
-
-
 
 
 Mov ax,0013h
@@ -1220,13 +1222,13 @@ printrighthand:
 cmp stateRightHand,3
 je setstaterighthand1
 
-mov al,0
+push 0h
 
 call printrighthandproc
 
 inc stateRightHand
 
-mov al,0fh
+push 0fh
 
 call printrighthandproc
 
@@ -1234,10 +1236,10 @@ jmp Onclick
    
    
 setstaterighthand1:
-mov al,0
+push 0h
 call printrighthandproc
 mov stateRightHand,1
-mov al,0fh
+push 0fh
 call printrighthandproc
 jmp Onclick
 ;endrighthand
@@ -1247,13 +1249,13 @@ printlefthand:
 cmp stateleftHand,3
 je setstatelefthand1
 
-mov al,0
+push 0h
 
 call printlefthandproc
 
 inc stateleftHand
 
-mov al,0fh
+push 0fh
 
 call printlefthandproc
 
@@ -1261,10 +1263,10 @@ jmp Onclick
    
    
 setstatelefthand1:
-mov al,0
+push 0h
 call printlefthandproc
 mov stateleftHand,1
-mov al,0fh
+push 0fh
 call printlefthandproc
 jmp Onclick
 ;end left hand
@@ -1275,13 +1277,13 @@ printrightleg:
 cmp stateRightleg,3
 je setstaterightleg1
 
-mov al,0
+push 0h
 
 call printrightlegproc
 
 inc stateRightleg
 
-mov al,0fh
+push 0fh
 
 call printrightlegproc
 
@@ -1289,10 +1291,10 @@ jmp Onclick
    
    
 setstaterightleg1:
-mov al,0
+push 0h
 call printrightlegproc
 mov stateRightleg,1
-mov al,0fh
+push 0fh
 call printrightlegproc
 jmp Onclick
 
@@ -1303,13 +1305,13 @@ printleftleg:
 cmp stateleftleg,3
 je setstateleftleg1
 
-mov al,0
+push 0h
 
 call printleftlegproc
 
 inc stateleftleg
 
-mov al,0fh
+push 0fh
 
 call printleftlegproc
 
@@ -1317,10 +1319,10 @@ jmp Onclick
    
    
 setstateleftleg1:
-mov al,0
+push 0h
 call printleftlegproc
 mov stateleftleg,1
-mov al,0fh
+push 0fh
 call printleftlegproc
 jmp Onclick
 
@@ -1357,13 +1359,13 @@ printrighthandB:
 cmp stateRightHand,1
 je setstaterighthand1B
 
-mov al,0
+push 0h
 
 call printrighthandproc
 
 dec stateRightHand
 
-mov al,0fh
+push 0fh
 
 call printrighthandproc
 
@@ -1371,10 +1373,10 @@ jmp Onclick
    
    
 setstaterighthand1B:
-mov al,0
+push 0h
 call printrighthandproc
 mov stateRightHand,3
-mov al,0fh
+push 0fh
 call printrighthandproc
 jmp Onclick
 
@@ -1393,13 +1395,13 @@ printlefthandB:
 cmp stateleftHand,1
 je setstatelefthand1B
 
-mov al,0
+push 0h
 
 call printlefthandproc
 
 dec stateleftHand
 
-mov al,0fh
+push 0fh
 
 call printlefthandproc
 
@@ -1407,10 +1409,10 @@ jmp Onclick
    
    
 setstatelefthand1B:
-mov al,0
+push 0h
 call printlefthandproc
 mov stateleftHand,3
-mov al,0fh
+push 0fh
 call printlefthandproc
 jmp Onclick
 ;end left hand
@@ -1421,13 +1423,13 @@ printrightlegB:
 cmp stateRightleg,1
 je setstaterightleg1B
 
-mov al,0
+push 0h
 
 call printrightlegproc
 
 dec stateRightleg
 
-mov al,0fh
+push 0fh
 
 call printrightlegproc
 
@@ -1435,10 +1437,10 @@ jmp Onclick
    
    
 setstaterightleg1B:
-mov al,0
+push 0h
 call printrightlegproc
 mov stateRightleg,3
-mov al,0fh
+push 0fh
 call printrightlegproc
 jmp Onclick
 ;end right leg
@@ -1449,13 +1451,13 @@ printleftlegB:
 cmp stateleftleg,1
 je setstateleftleg1B
 
-mov al,0
+push 0h
 
 call printleftlegproc
 
 dec stateleftleg
 
-mov al,0fh
+push 0fh
 
 call printleftlegproc
 
@@ -1463,10 +1465,10 @@ jmp Onclick
    
    
 setstateleftleg1B:
-mov al,0
+push 0h
 call printleftlegproc
 mov stateleftleg,3
-mov al,0fh
+push 0fh
 call printleftlegproc
 jmp Onclick
 ;end left leg
